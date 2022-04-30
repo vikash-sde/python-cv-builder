@@ -1,3 +1,4 @@
+from os import scandir
 from docx import Document
 from docx.shared import Inches
 
@@ -52,5 +53,25 @@ while True:
     else:
         break
 
+# skills
+
+document.add_heading('Skills')
+skill = input('Enter Skill')
+p = document.add_paragraph(skill, style='List Bullet')
+
+while True:
+    has_more_skills = input('Do you have more skills? (yes/no): ').lower()
+    if has_more_skills == 'yes':
+        skill = input('Enter Skill')
+        p = document.add_paragraph(skill, style='List Bullet')
+    else:
+        break
+
+# footer
+
+section = document.sections[0]
+footer = section.footer
+p = footer.paragraphs[0]
+p.text = 'CV generated using python docx package/module'
 
 document.save('cv.docx')
